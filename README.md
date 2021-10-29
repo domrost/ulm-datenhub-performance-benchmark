@@ -43,13 +43,13 @@ k6 run --local-ips=$LIST_OF_IP k6/${flow}.js -o csv=results/${flow}/data.csv
 
 Since these benchmarks are supposed to be picked up by other tools for external processing, the following arbitrary naming convention has been implemented:
 
-`${HTTP_METHOD}_${USERS}u_${SENSORS}s_${PARALLEL}p`
+`${STAGE}_${API}_${HTTP_METHOD}_${USERS}u_${SENSORS}s_${PARALLEL}p`
 
 ## Scenario description
 
 * `get_1u_1s`: Get requests of a single user simulating a single sensor in a single dataset requesting a single datapoint as fast as possible. The amount of parallel requests is changed as follow: `[1, 2, 4, 8, 16, 32, 48]`
 * `post_1u_1s`: Post requests of a single user simulating a single sensor in a single dataset appending a single datapoint as fast as possible. The amount of parallel requests is changed as follow: `[1, 2, 4, 6, 10, 42]`
-* `post_1u_Xs`: 
+* `post_1u_Xs`:  
 * `prod_get_1u_1s`: Same as `get_1u_1s` but with a fixed preconfigured public datapoint on the production system.
 
 # Deployments
