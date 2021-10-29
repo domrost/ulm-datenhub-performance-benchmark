@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: k6
+
+bases:
+  - ../../../base
+
+configMapGenerator:
+  - name: k6-settings
+    literals:
+    - FLOW=testhub_ckan_get_1u_1s
+    - RESOURCE_ID=9de89eb9-23dc-4ce1-bd28-50befd4037b3
+    - CERT_PATH=/auth/cert
+    - KEY_PATH=/auth/key
+
+secretGenerator:
+  - name: k6-secret
+    envs:
+      - ../auth/.k6.env
+  - name: minio-secret
+    envs:
+      - ../auth/.minio.env
+    behavior: replace
+  - name: mtls-auth
+    files:
+      - ../auth/cert
+      - ../auth/key
+
+patchesStrategicMerge:
+  - deployment.yaml

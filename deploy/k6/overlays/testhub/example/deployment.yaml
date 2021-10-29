@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k6
+spec:
+  selector:
+    matchLabels:
+      base: k6
+  template:
+    spec:
+      containers:
+      - name: k6
+        volumeMounts:
+        - name: mtls-auth
+          mountPath: "/auth"
+      volumes:
+      - name: mtls-auth
+        secret:
+          secretName: mtls-auth

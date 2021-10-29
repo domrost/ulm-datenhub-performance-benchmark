@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k6
+spec:
+  selector:
+    matchLabels:
+      base: k6
+  template:
+    spec:
+      initContainers:
+      - name: install-mc
+        image: alpine
+        command:
+        - sh
+        - -c
+        - "wget -O /init-share/mc https://dl.min.io/client/mc/release/linux-amd64/archive/${MC_RELEASE}; chmod +x /init-share/mc"
+        env:
+        - name: MC_RELEASE
+          value: mc.RELEASE.2021-10-07T04-19-58Z
+        volumeMounts:
+        - name: init-share
+          mountPath: "/init-share"
+      containers:
+      - name: k6
+        # command: ["./run.sh"]
+        command: ["tail","-f","/dev/null"]
+        envFrom:
+        - configMapRef:
+            name: k6-settings
+        env:
+        - name: MC_HOST_k6
+          valueFrom:
+            secretKeyRef:
+              key: MC_HOST_k6
+              name: minio-secret
+        - name: AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: AUTH_TOKEN
+              name: k6-secret
+        image: k6-release-image
+        volumeMounts:
+        - name: k6-scripts
+          mountPath: /home/k6/scripts
+        - name: k6-run
+          mountPath: /home/k6/run.sh
+          subPath: run.sh
+        - name: init-share
+          mountPath: "/init-share"
+      volumes:
+      - name: k6-scripts
+        configMap:
+          name: k6-scripts
+      - name: k6-run
+        configMap:
+          name: k6-run
+          defaultMode: 0777
+      - name: init-share
+        emptyDir: {}
