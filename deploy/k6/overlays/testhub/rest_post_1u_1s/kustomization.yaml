@@ -9,7 +9,7 @@ bases:
 configMapGenerator:
   - name: k6-settings
     literals:
-    - FLOW=testhub_ckan_get_1u_1s
+    - FLOW=testhub_rest_post_1u_1s
     - DATASET_NAME=omi-bench
     - CERT_PATH=/auth/cert
     - KEY_PATH=/auth/key
