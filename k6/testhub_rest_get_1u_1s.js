@@ -1,4 +1,6 @@
 import http from 'k6/http';
+import { http_options, scenarioFactoryConstant, wrapImport, deleteResource} from './helper.js';
+
 
 export let options = {
   tlsAuth: [
@@ -11,23 +13,18 @@ export let options = {
   scenarios: {}, // to be set later
 };
 
+let url_prefix_setup = 'https://test-datenhub.ulm.de/ckan/api/3/action'
+let url_prefix_teardown = 'https://test-datenhub.ulm.de/ckan/api/3/action'
+let url_prefix = 'https://test-datenhub.ulm.de/api/v1'
+let dataset_name = __ENV.DATASET_NAME
+let timestamp = '2021-11-05T13:21:44'
 let duration = 300
 let pause = 30
 let prefix = 'get_1u_1s'
 
-let scenarios = {}
 let vus = [1, 2, 4, 8, 16, 32, 48]
-
-// scenario factory
-vus.forEach(function (value, i) {
-  scenarios[`${prefix}_${value}p`] = {
-    executor: 'constant-vus',
-    startTime: `${i * duration + 2 * pause}s`,
-    gracefulStop: `${pause}s`,
-    vus: value,
-    duration: `${duration}s`,
-  }
-});
+let scenarios = scenarioFactoryConstant(vus, prefix, duration, pause)
+const dump = open('./dump.csv', 'b');
 
 if (__ENV.scenario) {
   options.scenarios[__ENV.scenario] = scenarios[__ENV.scenario];
@@ -35,6 +32,18 @@ if (__ENV.scenario) {
   options.scenarios = scenarios;
 }
 
-export default function () {
-  http.get(`https://test-datenhub.ulm.de/api/v1/datasets/${__ENV.DATASET}/resources/${__ENV.DATAPOINT_QUERY}'`);
+export function setup() {
+  let resource_id =  wrapImport(url_prefix_setup, dataset_name, dump)
+  return resource_id
+}
+
+export default function (data) {
+  let resource_id = data
+
+   http.get(`${url_prefix}/datasets/${dataset_name}/resources/dump/?where=timestamp='${timestamp}'`, http_options);
+}
+
+export function teardown(data) {
+  let resource_id = data
+  deleteResource(url_prefix_teardown, resource_id);
 }

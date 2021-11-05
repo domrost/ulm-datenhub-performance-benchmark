@@ -22,6 +22,8 @@ configMapGenerator:
       - ../../../k6/testhub_rest_get_1u_1s.js
       - ../../../k6/testhub_rest_post_1u_1s.js
       - ../../../k6/testhub_rest_post_1u_Xs.js
+      - ../../../k6/helper.js
+      - ../../../k6/dump.csv
   - name: k6-run
     files:
       - run.sh

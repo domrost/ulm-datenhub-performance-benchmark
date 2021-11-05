@@ -4,6 +4,10 @@ k6 is a code centric tool for load testing, performance monitoring and chaos/rel
 
 ## Install dependencies and configure
 
+Each flow is supposed to be mostly self-contained and idempotent. GET scenarios will import a [csv dump](k6/dump.csv) that subsequently will be queried. POST scenarios will create appropriate resources in the datastore, that subsequently will be appended to. Afterwards any created data will be purged. To keep your test-data, remove the flows `teardown` step.
+
+Therefore only an existing organization with write access will be assumed.
+
 ### k6
 
 To install [k6](https://k6.io/) follow the [documentation](https://k6.io/docs/getting-started/installation/) on their website.
@@ -18,8 +22,7 @@ Authentication is twofold. You need you personal mTLS cert and key and an auth t
 
 ### Dataset configuration
 
-* `DATASET`: The name of the dataset you've created manually
-* `DATAPOINT_QUERY`: The resource/datapoint query for get requests e.g. `sorrir?limit=1&offset=0&where=timestamp%3D'2021-10-04T15%3A07%3A24.202000Z`
+* `DATASET_NAME`: The name of the dataset you've created manually
 
 ## Run a benchmark flow
 
