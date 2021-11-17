@@ -19,6 +19,7 @@ configMapGenerator:
       - ../../../k6/omi_ckan_post_1u_1s.js
       - ../../../k6/testhub_ckan_get_1u_1s.js
       - ../../../k6/testhub_ckan_post_1u_1s.js
+      - ../../../k6/testhub_ckan_post-update_1u_1s.js
       - ../../../k6/testhub_rest_get_1u_1s.js
       - ../../../k6/testhub_rest_post_1u_1s.js
       - ../../../k6/testhub_rest_post_1u_Xs.js

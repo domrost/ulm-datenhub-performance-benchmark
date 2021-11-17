@@ -5,7 +5,7 @@ export function scenarioFactoryConstant(vus, prefix, duration, pause) {
   vus.forEach(function (value, i) {
     scenarios[`${prefix}_${value}p`] = {
       executor: 'constant-vus',
-      startTime: `${i * duration + 2 * pause}s`,
+      startTime: `${i * (duration + 2 * pause)}s`,
       gracefulStop: `${pause}s`,
       vus: value,
       duration: `${duration}s`,

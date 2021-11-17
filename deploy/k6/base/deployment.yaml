@@ -23,8 +23,8 @@ spec:
           mountPath: "/init-share"
       containers:
       - name: k6
-        # command: ["./run.sh"]
-        command: ["tail","-f","/dev/null"]
+        command: ["./run.sh"]
+        # command: ["tail","-f","/dev/null"]
         envFrom:
         - configMapRef:
             name: k6-settings
