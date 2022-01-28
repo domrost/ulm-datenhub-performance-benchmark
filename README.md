@@ -1,34 +1,44 @@
 # Datahub benchmarks
 
-k6 is a code centric tool for load testing, performance monitoring and chaos/reliability testing. This repository contains some scenarios that are supposed to be run against the test-datahub of the city of Ulm in Germany. Each scenario has its own `js` file within the [`k6`](./k6) folder. Most scenarios consist of multiple sub-scenarios changing a single variable like the amount of parallel requests.
+This repository contains performance test scenarios that are supposed to be run against the data platform "Datenhub" of the city of Ulm in Germany.
 
-## Install dependencies and configure
+## Setup
 
-Each flow is supposed to be mostly self-contained and idempotent. GET scenarios will first upload  a [csv dump](k6/dump.csv) into a resource, which subsequently will be queried. POST scenarios will create appropriate resources in the datastore, that subsequently will be appended to. After executing the test, any created data will be purged. To keep your test-data, start the run with the `--no-teardown` option.
+### Installing k6
 
-Therefore only an existing organization with write access will be assumed.
-
-### k6
-
+k6 is a code-centric tool for load testing, performance monitoring and chaos/reliability testing.
 To install [k6](https://k6.io/) follow the [documentation](https://k6.io/docs/getting-started/installation/) on their website.
 
-### Authentication
+### Configuration
 
-Authentication is twofold. You need your personal mTLS cert and key and an auth token. Set the following environment variables to configure them.
+#### Authentication
 
-- `AUTH_TOKEN`: Your token representing your use account on the datahub
-- `CERT_PATH`: The path to your TLS cert
-- `KEY_PATH`: The path to your TLS key
+Authentication is twofold. You need your personal mTLS cert and key and an auth token.
 
-## Run a Benchmark
+- `DATENHUB_AUTH_TOKEN`: Your API key token representing your user account on the Datenhub. Find it on your user account page on Datenhub.
+- `DATENHUB_CERT_PATH`: The path to your TLS certificate `.pem` file
+- `DATENHUB_KEY_PATH`: The path to your TLS key `.pem` file
 
-To run a single k6 test case, invoke k6 with the corresponding file, for example:
+You can set these as environment variables in your OS or execution environment or provide them to k6 with the k6 `-e` flag when running the scripts, e.g. `-e DATENHUB_KEY_PATH=/path/to/key/file/key.pem`
+
+#### Further Configuration Options
+
+Further common configuration options are available in the [configuration](./config/) folder. Here you can find:
+
+- [config.js](config/config.js): Common configuration options for all scripts
+- [httpConfig](config/httpConfig.js): Common header configuration for the HTTP requests
+
+## Running Performance Tests
+
+Each scenario has its own `.js` file in the [testcases](./testcases/) folder. To run a testcase, in a terminal run the `k6 run` command and pass the corresponding file to it. Example:
 
 ```sh
-k6 run .js
+run -e DATENHUB_CERT_PATH=/path/to/cert/file/cert.pem -e DATENHUB_KEY_PATH=/path/to/key/file/key.pem -e DATENHUB_AUTH_TOKEN=4f24bbb3-23ff-2725-b192-021c1452c678 ./testcases/spec/spec_III.1_test-datenhub_platform-api_get_1rps_1resource.js
 ```
 
 ## Test Cases
+
+Each test case is supposed to be self-contained and idempotent. GET scenarios will first upload  a [csv dump](k6/dump.csv) into a resource, which subsequently will be queried. POST scenarios will create appropriate resources in the datastore, that subsequently will be appended to. After executing the test, any created data will be purged. To keep your test-data, start the run with the `--no-teardown` flag.
 
 We differentiate different kinds of test cases:
 
