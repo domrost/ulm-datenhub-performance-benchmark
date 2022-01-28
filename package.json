@@ -1,0 +1,19 @@
+{
+  "name": "performance-benchmark",
+  "version": "1.0.0",
+  "description": "k6 is a code centric tool for load testing, performance monitoring and chaos/reliability testing. This repository contains some scenarios that are supposed to be run against the test-datahub of the city of Ulm in Germany. Each scenario has its own `js` file within the [`k6`](./k6) folder. Most scenarios consist of multiple sub-scenarios changing a single variable like the amount of parallel requests.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://erbenschell.iese.fraunhofer.de/ulm-datenhub/performance-benchmark.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/k6": "^0.35.2"
+  }
+}

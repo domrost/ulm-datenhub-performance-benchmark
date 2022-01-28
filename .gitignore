@@ -4,3 +4,5 @@ auth
 results
 *.env
 charts
+*.pfx
+*.pem
