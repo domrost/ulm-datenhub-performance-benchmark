@@ -34,7 +34,6 @@ Each scenario has its own `.js` file in the [testcases](./testcases/) folder. To
 
 ```sh
 run -e DATENHUB_CERT_PATH=/path/to/cert/file/cert.pem -e DATENHUB_KEY_PATH=/path/to/key/file/key.pem -e DATENHUB_AUTH_TOKEN=XXX ./testcases/spec/spec_III.1_test-datenhub_platform-api_get_1rps_1resource.js
-
 ```
 
 ## Test Cases
