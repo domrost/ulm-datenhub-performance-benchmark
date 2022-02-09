@@ -10,6 +10,13 @@ k6 is a code-centric tool for load testing, performance monitoring and chaos/rel
 To install [k6](https://k6.io/) follow the [documentation](https://k6.io/docs/getting-started/installation/) on their website.
 
 ### Configuration
+You have to configure the system, the test is supposed to run on. This can be done via the environment variable SYSTEM.
+The following options ar available:
+- `dev`: dev-datenhub.ulm.de
+- `test`: test-datenhub.ulm.de
+- `prod`: datenhub.ulm.de
+- `omi`: omi-device036.e-technik.uni-ulm.de
+- `dev_tunnel`: dev-datenhub.ulm.de via ip tunneling
 
 #### Authentication
 
@@ -33,7 +40,7 @@ Further common configuration options are available in the [configuration](./conf
 Each scenario has its own `.js` file in the [testcases](./testcases/) folder. To run a testcase, in a terminal run the `k6 run` command and pass the corresponding file to it. Example:
 
 ```sh
-run -e DATENHUB_CERT_PATH=/path/to/cert/file/cert.pem -e DATENHUB_KEY_PATH=/path/to/key/file/key.pem -e DATENHUB_AUTH_TOKEN=XXX ./testcases/spec/spec_III.1_test-datenhub_platform-api_get_1rps_1resource.js
+run -e DATENHUB_CERT_PATH=/path/to/cert/file/cert.pem -e DATENHUB_KEY_PATH=/path/to/key/file/key.pem -e DATENHUB_AUTH_TOKEN=XXX -e SYSTEM=test ./testcases/spec/spec_III.1_test-datenhub_platform-api_get_1rps_1resource.js
 ```
 
 ## Test Cases

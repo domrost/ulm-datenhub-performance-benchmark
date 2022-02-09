@@ -6,12 +6,13 @@ import exec from 'k6/execution';
 import http from 'k6/http';
 import { CONFIG } from '../../config/config.js';
 import { HTTP_OPTIONS } from '../../config/httpConfig.js';
-import { deleteAllRessources } from '../../util/resources.js';
+import {deleteAllRessources, getUrl} from '../../util/resources.js';
 
 export let options = CONFIG.options;
 
-const CKAN_API_URL = CONFIG.urlTest + CONFIG.ckanAPIPath;
-const PLATFORM_API_URL = CONFIG.urlTest + CONFIG.platformAPIPath;
+const URL = getUrl();
+const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
+const PLATFORM_API_URL = URL + CONFIG.platformAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 const MAX_VUs = 100;
 

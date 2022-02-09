@@ -6,7 +6,7 @@ import exec from 'k6/execution';
 import http from 'k6/http';
 import { CONFIG } from '../../config/config.js';
 import { HTTP_OPTIONS } from '../../config/httpConfig.js';
-import { deleteAllRessources, findOrCreateResource } from '../../util/resources.js';
+import {deleteAllRessources, findOrCreateResource, getUrl} from '../../util/resources.js';
 
 export let options = CONFIG.options;
 
@@ -23,11 +23,12 @@ let scenarios = {
 };
 options.scenarios = scenarios;
 
-const CKAN_API_URL = CONFIG.urlTest + CONFIG.ckanAPIPath;
+const URL = getUrl();
+const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 const RESOURCE_NAME = CONFIG.resourceName;
 
-let resourceData = open('../../example_data/dump.csv', 'b'); //jshint ignore: line
+let resourceData = open('../../resources/dump.csv', 'b'); //jshint ignore: line
 
 export function setup() {
   let resourceID = findOrCreateResource(CKAN_API_URL, DATASET_NAME, RESOURCE_NAME, resourceData);
