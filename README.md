@@ -11,7 +11,7 @@ To install [k6](https://k6.io/) follow the [documentation](https://k6.io/docs/ge
 
 ### Configuration
 You have to configure the system, the test is supposed to run on. This can be done via the environment variable SYSTEM.
-The following options ar available:
+The following options are available:
 - `dev`: dev-datenhub.ulm.de
 - `test`: test-datenhub.ulm.de
 - `prod`: datenhub.ulm.de
