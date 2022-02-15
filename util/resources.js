@@ -150,3 +150,8 @@ export function wrapSetup(url_prefix, vus, prefix, dataset_name) {
   console.log(`resource list: ${JSON.stringify(resources)}`)
   return resources
 }
+
+
+export function randomIntBetween(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

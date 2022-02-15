@@ -1,9 +1,8 @@
 import http from 'k6/http';
 import exec from 'k6/execution';
-import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 import {HTTP_OPTIONS} from "../../config/httpConfig.js";
 import {CONFIG} from "../../config/config.js"
-import {getUrl, wrapSetup, deleteAllRessources} from "../../util/resources.js";
+import {getUrl, wrapSetup, deleteAllRessources, randomIntBetween} from "../../util/resources.js";
 import {createPeakScenarios} from "./scenarios.js";
 
 

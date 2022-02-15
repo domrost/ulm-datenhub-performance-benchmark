@@ -1,8 +1,7 @@
 import http from 'k6/http';
 import exec from 'k6/execution';
-import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 import {HTTP_OPTIONS} from "../../config/httpConfig.js";
-import {deleteAllRessources, getUrl} from "../../util/resources.js";
+import {deleteAllRessources, getUrl, randomIntBetween} from "../../util/resources.js";
 import {CONFIG} from "../../config/config.js";
 import {createPeakScenarios} from "./scenarios.js";
 
@@ -13,8 +12,8 @@ const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
 const PLATFORM_API_URL = URL + CONFIG.platformAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 
-let scenarioDuration = 300;
-let scenarioPause = 30;
+let scenarioDuration = 7;
+let scenarioPause = 0;
 let scenarioNamePrefix = `${__ENV.SYSTEM}_post_1u_1s`;
 
 let vus = [1, 2, 4, 8, 16, 32, 48];
