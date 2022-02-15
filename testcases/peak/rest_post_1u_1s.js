@@ -16,7 +16,7 @@ let scenarioDuration = 300;
 let scenarioPause = 30;
 let scenarioNamePrefix = `${__ENV.SYSTEM}_post_1u_1s`;
 
-let vus = [1, 2, 4, 8, 16, 32, 48];
+let vus = [1, 2, 4, 6, 10, 42];
 
 let scenarios = createPeakScenarios(vus, scenarioNamePrefix, scenarioDuration, scenarioPause);
 options.scenarios = scenarios; //jshint ignore: line
