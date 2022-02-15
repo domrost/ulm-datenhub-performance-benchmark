@@ -12,8 +12,8 @@ const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
 const PLATFORM_API_URL = URL + CONFIG.platformAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 
-let scenarioDuration = 7;
-let scenarioPause = 0;
+let scenarioDuration = 300;
+let scenarioPause = 30;
 let scenarioNamePrefix = `${__ENV.SYSTEM}_post_1u_1s`;
 
 let vus = [1, 2, 4, 8, 16, 32, 48];

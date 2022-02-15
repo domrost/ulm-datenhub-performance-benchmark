@@ -14,7 +14,7 @@ const TIMESTAMP = CONFIG.timestamp;
 let scenarioDuation = 300;
 let scenarioPause = 30;
 let sceanrioNamePrefix = `${__ENV.SYSTEM}_ckan_get_1u_1s`;
-let vus = [1,2,4,8,16,32,48];
+let vus = [1, 2, 4, 8, 16, 32, 48];
 
 let scenarios = createPeakScenarios(vus, sceanrioNamePrefix, scenarioDuation, scenarioPause);
 options.scenarios = scenarios; //jshint ignore: line

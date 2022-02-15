@@ -15,7 +15,7 @@ let scenarioDuration = 300;
 let scenarioPause = 30;
 let scenarioNamePrefix = `${__ENV.SYSTEM}_ckan_post-update_1u_1s`
 
-let vus = [1, 2, 4,6,10,42]
+let vus = [1, 2, 4, 6, 10, 42]
 let scenarios = createPeakScenarios(vus, scenarioNamePrefix, scenarioDuration, scenarioPause)
 options.scenarios = scenarios;
 
