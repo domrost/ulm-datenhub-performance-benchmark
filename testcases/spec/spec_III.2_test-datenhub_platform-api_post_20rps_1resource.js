@@ -1,12 +1,11 @@
 "use strict";
 
-import { randomIntBetween } from "https://jslib.k6.io/k6-utils/1.1.0/index.js";
 import { check } from 'k6';
 import exec from 'k6/execution';
 import http from 'k6/http';
 import { CONFIG } from '../../config/config.js';
 import { HTTP_OPTIONS } from '../../config/httpConfig.js';
-import { deleteAllRessources } from '../../util/resources.js';
+import {deleteAllRessources, getUrl, randomIntBetween} from '../../util/resources.js';
 
 export let options = CONFIG.options;
 
@@ -22,8 +21,9 @@ let scenarios = {
 };
 options.scenarios = scenarios;
 
-const CKAN_API_URL = CONFIG.urlTest + CONFIG.ckanAPIPath;
-const PLATFORM_API_URL = CONFIG.urlTest + CONFIG.platformAPIPath;
+const URL = getUrl();
+const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
+const PLATFORM_API_URL = URL + CONFIG.platformAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 const RESOURCE_NAME = CONFIG.resourceName;
 

@@ -2,9 +2,12 @@
 
 import http from 'k6/http';
 import { HTTP_OPTIONS, HTTP_OPTIONS_AUTH } from '../config/httpConfig.js';
+import {CONFIG} from "../config/config.js";
 
 export function findOrCreateResource(CKANURL, datasetName, resourceName, data) {
+  console.log("calling findResource")
   let resourceID = findResource(CKANURL, datasetName, resourceName);
+  console.log("find resource terminated");
   if (resourceID) {
     console.log(`Found resource: ${resourceID}`);
     return resourceID;
@@ -77,7 +80,26 @@ export function createResource(CKANURL, datasetName, resourceName, data) {
   return res.json().result.id;
 }
 
-/* export function createDatastore(url_prefix, name, dataset_name) {
+
+export function getUrl() {
+  if(__ENV.SYSTEM === 'dev') {
+    return CONFIG.urlDev;
+  }
+  else if(__ENV.SYSTEM === 'dev_tunnel') {
+    return CONFIG.urlDevTunnel;
+  }
+  else if(__ENV.SYSTEM === 'prod') {
+    return CONFIG.urlProd;
+  }
+  else if (__ENV.SYSTEM === 'omi') {
+    return CONFIG.urlOmi;
+  }
+  else {
+    return CONFIG.urlTest;
+  }
+}
+
+export function createDatastore(url_prefix, name, dataset_name) {
   var url = `${url_prefix}/datastore_create`;
   var payload = JSON.stringify({
     force: "true",
@@ -108,11 +130,11 @@ export function createResource(CKANURL, datasetName, resourceName, data) {
       }
     ]
   });
-  const res = http.post(url, payload, http_options);
+  const res = http.post(url, payload, HTTP_OPTIONS);
   return res.json().result.resource_id
-} */
+}
 
-/* export function wrapSetup(url_prefix, vus, prefix, dataset_name) {
+export function wrapSetup(url_prefix, vus, prefix, dataset_name) {
   let resources = {}
   for (let index = 0; index < vus.length; index++) {
     let name = `${prefix}_${vus[index]}p`
@@ -127,4 +149,9 @@ export function createResource(CKANURL, datasetName, resourceName, data) {
   }
   console.log(`resource list: ${JSON.stringify(resources)}`)
   return resources
-} */
+}
+
+
+export function randomIntBetween(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
