@@ -12,7 +12,7 @@ export let options = CONFIG.options;
 let scenarios = {
   spec_III_2: {
     executor: "constant-arrival-rate",
-    duration: "1m",
+    duration: "5m",
     preAllocatedVUs: 30,
     maxVUs: 100,
     rate: 20,
@@ -26,6 +26,16 @@ const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
 const PLATFORM_API_URL = URL + CONFIG.platformAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 const RESOURCE_NAME = CONFIG.resourceName;
+
+export function setup () {
+  let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}/resources/${RESOURCE_NAME}?primaryKey=id,timestamp`;
+  var payload = JSON.stringify({
+    id: 1000,
+    timestamp: new Date().toISOString(),
+    value: randomIntBetween(36, 37),
+  });
+  let res = http.post(url, payload, HTTP_OPTIONS);
+}
 
 export default function (data) {
   let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}/resources/${RESOURCE_NAME}?primaryKey=id,timestamp`;

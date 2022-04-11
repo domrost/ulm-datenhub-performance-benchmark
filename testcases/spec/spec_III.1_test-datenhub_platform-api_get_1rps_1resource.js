@@ -11,7 +11,7 @@ export let options = CONFIG.options;
 let scenarios = {
   spec_III_1: {
     executor: "constant-arrival-rate",
-    duration: "1m",
+    duration: "5m",
     preAllocatedVUs: 5,
     rate: 1,
     timeUnit: "1s",
