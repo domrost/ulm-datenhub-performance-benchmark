@@ -27,6 +27,24 @@ let scenarios = {
 };
 options.scenarios = scenarios;
 
+export function setup() {
+  for(let i=1; i<= 100; i++) {
+    let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}/resources/${i}?primaryKey=id,timestamp`;
+    var payload = JSON.stringify({
+      id: 1000,
+      timestamp: new Date().toISOString(),
+      value: randomIntBetween(36, 37),
+    });
+    let res = http.post(url, payload, HTTP_OPTIONS);
+    check(res, {
+      'is status 200 or 201': (r) => r.status === 200 || r.status === 201,
+    });
+    if (res.status !== 200 && res.status !== 201) {
+      console.log(`Response check failed: ${res.status_text}`);
+    }
+  }
+}
+
 export default function (data) {
   const VU_ID = exec.vu.idInInstance;
 
