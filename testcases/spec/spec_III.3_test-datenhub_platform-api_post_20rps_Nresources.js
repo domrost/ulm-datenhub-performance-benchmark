@@ -18,7 +18,7 @@ const MAX_VUs = 100;
 let scenarios = {
   spec_III_3: {
     executor: "constant-arrival-rate",
-    duration: "1m",
+    duration: "5m",
     preAllocatedVUs: 30,
     maxVUs: MAX_VUs,
     rate: 20,
