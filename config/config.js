@@ -19,7 +19,7 @@ export let CONFIG = {
         key: open(`${__ENV.DATENHUB_KEY_PATH}`), // jshint ignore:line
       },
     ],
-    teardownTimeout: '5m',
+    teardownTimeout: '15m',
     setupTimeout: '30m',
     scenarios: {}
   }

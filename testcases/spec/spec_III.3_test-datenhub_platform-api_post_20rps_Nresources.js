@@ -14,6 +14,7 @@ const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
 const PLATFORM_API_URL = URL + CONFIG.platformAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
 const MAX_VUs = 100;
+const NUMBER_DATASETS = 10; //Assumption: all datasets exist and their name is DATASET_NAME<number>
 
 let scenarios = {
   spec_III_3: {
@@ -29,7 +30,9 @@ options.scenarios = scenarios;
 
 export function setup() {
   for(let i=1; i<= 100; i++) {
-    let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}/resources/${i}?primaryKey=id,timestamp`;
+    let datasetNumber = i % NUMBER_DATASETS;
+    console.log(`initialize ${i}th ressource in dataset ${datasetNumber}`)
+    let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}${datasetNumber}/resources/${i}?primaryKey=id,timestamp`;
     var payload = JSON.stringify({
       id: 1000,
       timestamp: new Date().toISOString(),
@@ -47,8 +50,9 @@ export function setup() {
 
 export default function (data) {
   const VU_ID = exec.vu.idInInstance;
+  const datasetNumber = VU_ID % NUMBER_DATASETS;
 
-  let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}/resources/${VU_ID}?primaryKey=id,timestamp`;
+  let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}${datasetNumber}/resources/${VU_ID}?primaryKey=id,timestamp`;
   var payload = JSON.stringify({
     id: VU_ID,
     timestamp: new Date().toISOString(),
@@ -65,5 +69,7 @@ export default function (data) {
 }
 
 export function teardown(data) {
-  deleteAllRessources(CKAN_API_URL, DATASET_NAME);
+  for(let i=0; i < NUMBER_DATASETS; i++) {
+    deleteAllRessources(CKAN_API_URL, `${DATASET_NAME}${i}`);
+  }
 }
