@@ -20,6 +20,7 @@ export let CONFIG = {
       },
     ],
     teardownTimeout: '5m',
+    setupTimeout: '30m',
     scenarios: {}
   }
 };
