@@ -45,9 +45,9 @@ export function setup() {
     deleteAllRessources(CKAN_API_URL, `${DATASET_NAME}${i}`);
   }
 
-  for(let i=1; i<= 10; i++) {
+  for(let i=1; i <= (NUMBER_DATASETS * RESSOURCES_PER_DATASET); i++) {
     let datasetNumber = i % NUMBER_DATASETS;
-    let ressourceNumber = i % (NUMBER_DATASETS * RESSOURCES_PER_DATASET);
+    let ressourceNumber = i % (NUMBER_DATASETS * RESSOURCES_PER_DATASET); //necessary to create the datasets 0.. instead 1..
     console.log(`initialize ${ressourceNumber}th ressource in dataset ${datasetNumber}`);
     let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}${datasetNumber}/resources/${ressourceNumber}?primaryKey=id,timestamp`;
     var payload = JSON.stringify({
@@ -69,7 +69,6 @@ export default function (data) {
   const VU_ID = exec.vu.idInInstance;
   const datasetNumber = VU_ID % NUMBER_DATASETS;
   const resourceNumber = VU_ID % (NUMBER_DATASETS * RESSOURCES_PER_DATASET);
-  console.log(`Posting into dataset ${datasetNumber} in the ressource ${resourceNumber}`);
 
   let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}${datasetNumber}/resources/${resourceNumber}?primaryKey=id,timestamp`;
   var payload = JSON.stringify({
