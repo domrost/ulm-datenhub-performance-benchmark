@@ -38,6 +38,7 @@ const DATASET_NAME = CONFIG.datasetName;
 const RESOURCE_NAME = CONFIG.resourceName;
 
 export function setup () {
+  deleteAllRessources(CKAN_API_URL, DATASET_NAME);
   let url = `${PLATFORM_API_URL}/datasets/${DATASET_NAME}/resources/${RESOURCE_NAME}?primaryKey=id,timestamp`;
   var payload = JSON.stringify({
     id: 1000,
