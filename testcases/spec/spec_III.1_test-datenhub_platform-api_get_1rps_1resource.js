@@ -18,7 +18,17 @@ let scenarios = {
     startTime: "10s"
   }
 };
+
+let thresholds = {
+  'http_req_duration{scenario:spec_III_1}': [
+    `max>=0`,
+  ],
+  'http_req_failed{scenario:spec_III_1}': [
+  ],
+};
+
 options.scenarios = scenarios;
+options.thresholds = thresholds;
 
 const URL = getUrl();
 const CKAN_API_URL = URL + CONFIG.ckanAPIPath;

@@ -26,7 +26,17 @@ let scenarios = {
     timeUnit: "1s",
   }
 };
+
+let thresholds = {
+  'http_req_duration{scenario:spec_III_3}': [
+    `max>=0`,
+  ],
+  'http_req_failed{scenario:spec_III_3}': [
+  ],
+};
+
 options.scenarios = scenarios;
+options.thresholds = thresholds;
 
 export function setup() {
   for(let i=1; i<= 100; i++) {

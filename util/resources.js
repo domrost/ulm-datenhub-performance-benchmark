@@ -94,6 +94,9 @@ export function getUrl() {
   else if (__ENV.SYSTEM === 'omi') {
     return CONFIG.urlOmi;
   }
+  else if (__ENV.SYSTEM === 'int') {
+    return CONFIG.urlInt;
+  }
   else {
     return CONFIG.urlTest;
   }
