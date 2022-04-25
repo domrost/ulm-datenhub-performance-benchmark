@@ -14,8 +14,7 @@ import {HTTP_OPTIONS_AUTH} from "../../config/httpConfig.js";
 const URL = getUrl();
 const CKAN_API_URL = URL + CONFIG.ckanAPIPath;
 const DATASET_NAME = CONFIG.datasetName;
-const RESOURCE_NAME = CONFIG.resourceName;
-const TIMESTAMP = CONFIG.timestamp;
+
 
 export const options = {
     scenarios: {
@@ -55,8 +54,6 @@ export default function () {
     if (res.status !== 200 && res.status !== 201) {
         console.log(`Response check failed: ${res.status_text}`);
     }
-    // We're injecting a processing pause for illustrative purposes only!
-    // Each iteration will be ~515ms, therefore ~2 iterations/second per VU maximum throughput.
 }
 
 export function teardown() {
