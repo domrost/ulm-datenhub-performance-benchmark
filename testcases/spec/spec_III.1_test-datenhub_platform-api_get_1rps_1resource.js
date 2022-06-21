@@ -11,14 +11,24 @@ export let options = CONFIG.options;
 let scenarios = {
   spec_III_1: {
     executor: "constant-arrival-rate",
-    duration: "1m",
+    duration: "5m",
     preAllocatedVUs: 5,
     rate: 1,
     timeUnit: "1s",
     startTime: "10s"
   }
 };
+
+let thresholds = {
+  'http_req_duration{scenario:spec_III_1}': [
+    `max>=0`,
+  ],
+  'http_req_failed{scenario:spec_III_1}': [
+  ],
+};
+
 options.scenarios = scenarios;
+options.thresholds = thresholds;
 
 const URL = getUrl();
 const CKAN_API_URL = URL + CONFIG.ckanAPIPath;

@@ -94,6 +94,12 @@ export function getUrl() {
   else if (__ENV.SYSTEM === 'omi') {
     return CONFIG.urlOmi;
   }
+  else if (__ENV.SYSTEM === 'int') {
+    return CONFIG.urlInt;
+  }
+  else if (__ENV.SYSTEM == 'local') {
+    return CONFIG.local;
+  }
   else {
     return CONFIG.urlTest;
   }

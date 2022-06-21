@@ -6,6 +6,10 @@ export let CONFIG = {
   urlProd: "https://datenhub.ulm.de",
   urlDevTunnel: "http://192.168.31.230",
   urlOmi: "https://omi-device036.e-technik.uni-ulm.de",
+  urlInt: "http://citysens-int.dev.exxcellent.de",
+  local: "http://host.docker.internal",
+//  platformAPIPath: ":8070",
+//  ckanAPIPath: ":5000/api/3/action",
   platformAPIPath: "/api/v1",
   ckanAPIPath: "/ckan/api/3/action",
   datasetName: "performancetest",
@@ -19,7 +23,10 @@ export let CONFIG = {
         key: open(`${__ENV.DATENHUB_KEY_PATH}`), // jshint ignore:line
       },
     ],
-    teardownTimeout: '5m',
+    thresholds: {},
+    summaryTrendStats: [ 'avg', 'min', 'med', 'max', 'p(50)', 'p(90)', 'p(95)'],
+    teardownTimeout: '15m',
+    setupTimeout: '30m',
     scenarios: {}
   }
 };

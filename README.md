@@ -17,6 +17,7 @@ The following options are available:
 - `prod`: datenhub.ulm.de
 - `omi`: omi-device036.e-technik.uni-ulm.de
 - `dev_tunnel`: dev-datenhub.ulm.de via ip tunneling
+- `int`: http://citysens-int.dev.exxcellent.de
 
 #### Authentication
 
@@ -59,3 +60,7 @@ Spec test cases are located in the `spec` folder.
 ### Peak Test Cases
 
 Peak test cases are located in the `peak` folder.
+
+### Metrics per scenario:
+To get metrics per scenario, you can add <metric_name>{scenario_name}[] into the thresholds section. E.g. adding 
+http_req_duration{specIII.1}[] into the thresholds section will add the request duration during the scenario specIII.1 to the final summary.
